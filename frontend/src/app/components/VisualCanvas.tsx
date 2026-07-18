@@ -84,34 +84,40 @@ export default function VisualCanvas({ graphDefinition, metadata }: VisualCanvas
     return (
         <div className="w-full h-full relative flex-1 min-h-0">
             <style>{`
-                /* Prevent Tailwind from auto-squishing wide SVGs */
+                /* Ensure explicit parent overflow sliding */
+                .mermaid-host {
+                    overflow-x: auto !important;
+                    overflow-y: auto !important;
+                    padding: 40px !important;
+                }
+                /* Heavily enlarge blocks and enable horizontal layout slider */
                 .mermaid-host svg {
                     max-width: none !important;
-                    min-width: 100% !important; 
+                    min-width: 1400px !important; /* Forces slider & massively boosts block size */
                     height: auto !important;
                     margin: auto !important;
                 }
-                /* Massive bump to text size for readability - forces Mermaid to draw huge blocks naturally */
+                /* Thick, massive text */
                 .node foreignObject div, .node text {
-                    font-size: 22px !important;
+                    font-size: 24px !important;
                     color: #0f172a !important;
                     fill: #0f172a !important;
-                    font-weight: 700 !important;
-                    line-height: 1.5 !important;
+                    font-weight: 800 !important;
+                    line-height: 1.6 !important;
                 }
-                /* Add subtle node borders */
+                /* Thickened block bounds */
                 .node rect, .node polygon, .node circle {
-                    stroke-width: 2px !important;
+                    stroke-width: 3px !important;
                     stroke: #475569 !important;
                 }
                 .edgePath path {
                     stroke: #64748b !important;
-                    stroke-width: 2.5px !important;
+                    stroke-width: 3px !important;
                 }
             `}</style>
             <div
                 ref={mermaidRef}
-                className="mermaid-host w-full h-full overflow-auto flex justify-center p-8 custom-scrollbar"
+                className="mermaid-host w-full h-full custom-scrollbar"
             />
 
             {/* Metadata overlay mapping */}
