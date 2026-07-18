@@ -89,8 +89,14 @@ def compile_sql(payload: DesignPayload):
         if start_idx == -1 or end_idx == -1:
             raise ValueError("Response does not contain valid JSON bounds.")
             
-        json_str = text[start_idx:end_idx+1]
-        data = json.loads(json_str)
+        raw_json_str = text[start_idx:end_idx+1]
+        
+        # Robust sanitization for trailing commas and single-line comments
+        import re
+        sanitized = re.sub(r'//.*?\n', '\n', raw_json_str)
+        sanitized = re.sub(r',(\s*[}\]])', r'\1', sanitized)
+        
+        data = json.loads(sanitized)
         
         return data
 
