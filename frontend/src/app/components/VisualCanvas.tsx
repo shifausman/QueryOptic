@@ -97,13 +97,10 @@ export default function VisualCanvas({ graphDefinition, metadata }: VisualCanvas
                     height: auto !important;
                     margin: auto !important;
                 }
-                /* Thick, massive text */
+                /* Thick, massive text - let Mermaid handle sizing natively! */
                 .node foreignObject div, .node text {
-                    font-size: 24px !important;
                     color: #0f172a !important;
                     fill: #0f172a !important;
-                    font-weight: 800 !important;
-                    line-height: 1.6 !important;
                 }
                 /* Thickened block bounds */
                 .node rect, .node polygon, .node circle {
