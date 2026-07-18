@@ -83,9 +83,31 @@ export default function VisualCanvas({ graphDefinition, metadata }: VisualCanvas
 
     return (
         <div className="w-full h-full relative flex-1 min-h-0">
+            <style>{`
+                /* Revert to natural Mermaid bounds */
+                .mermaid-host svg {
+                    max-width: 100% !important;
+                    height: auto !important;
+                }
+                /* Force text inside nodes to be dark without forcing massive font sizes */
+                .node foreignObject div, .node text {
+                    color: #0f172a !important;
+                    fill: #0f172a !important;
+                    font-weight: 600 !important;
+                }
+                /* Add subtle node borders */
+                .node rect, .node polygon, .node circle {
+                    stroke-width: 1.5px !important;
+                    stroke: #475569 !important;
+                }
+                .edgePath path {
+                    stroke: #64748b !important;
+                    stroke-width: 2px !important;
+                }
+            `}</style>
             <div
                 ref={mermaidRef}
-                className="w-full h-full overflow-auto flex justify-center p-8 [&>svg]:min-w-[800px] [&>svg]:h-auto"
+                className="mermaid-host w-full h-full overflow-auto flex justify-center p-8 custom-scrollbar"
             />
 
             {/* Metadata overlay mapping */}

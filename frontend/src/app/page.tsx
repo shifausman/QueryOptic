@@ -58,7 +58,7 @@ export default function DesignStudio() {
     const toastId = toast.loading("Analyzing Query Engine Flow...");
 
     try {
-      const res = await fetch("http://localhost:8000/api/compile", {
+      const res = await fetch("http://127.0.0.1:8000/api/compile", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sql, schema_str: schema })
