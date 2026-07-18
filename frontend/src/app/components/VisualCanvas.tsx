@@ -23,17 +23,17 @@ export default function VisualCanvas({ graphDefinition, metadata }: VisualCanvas
     const [selectedNode, setSelectedNode] = useState<NodeMetadata | null>(null);
 
     useEffect(() => {
-        // Initialize Mermaid with larger typography constraints
+        // Initialize Mermaid with normal typography constraints
         mermaid.initialize({
             startOnLoad: false,
             theme: 'dark',
             themeVariables: {
                 fontFamily: 'Inter, sans-serif',
-                fontSize: '18px',          // Boost font size significantly for readability
-                nodeTextColor: '#0f172a',  // Ensure explicitly dark text on light pastel nodes
+                fontSize: '14px',
+                nodeTextColor: '#0f172a',
                 lineColor: '#64748b'
             },
-            securityLevel: 'loose' // Needed to support click events
+            securityLevel: 'loose'
         });
 
         const renderGraph = async () => {
@@ -50,7 +50,9 @@ export default function VisualCanvas({ graphDefinition, metadata }: VisualCanvas
                     // Attach click handlers to rendered SVG nodes manually since mermaid clicks can be finicky in React
                     const nodes = mermaidRef.current.querySelectorAll('.node');
                     nodes.forEach(node => {
-                        node.style.cursor = 'pointer';
+                        if (node instanceof HTMLElement || node instanceof SVGElement) {
+                            node.style.cursor = 'pointer';
+                        }
                         node.addEventListener('click', () => {
                             // To be absolutely sure, we can check if metadata keys are in the node class or id
                             const matchedKey = Object.keys(metadata).find(k => node.id.includes(k));
@@ -86,16 +88,14 @@ export default function VisualCanvas({ graphDefinition, metadata }: VisualCanvas
             <style>{`
                 /* Ensure explicit parent overflow sliding */
                 .mermaid-host {
-                    overflow-x: auto !important;
-                    overflow-y: auto !important;
-                    padding: 40px !important;
+                    overflow: auto;
+                    padding: 40px;
+                    text-align: center;
                 }
-                /* Heavily enlarge blocks and enable horizontal layout slider */
+                /* Let Mermaid handle sizing naturally; prevent flex stretching */
                 .mermaid-host svg {
-                    max-width: none !important;
-                    min-width: 1400px !important; /* Forces slider & massively boosts block size */
-                    height: auto !important;
-                    margin: auto !important;
+                    display: block;
+                    margin: 0 auto;
                 }
                 /* Thick, massive text - let Mermaid handle sizing natively! */
                 .node foreignObject div, .node text {
