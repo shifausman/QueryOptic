@@ -87,24 +87,26 @@ export default function VisualCanvas({ graphDefinition, metadata }: VisualCanvas
                 /* Prevent Tailwind from auto-squishing wide SVGs */
                 .mermaid-host svg {
                     max-width: none !important;
+                    min-width: 100% !important; 
                     height: auto !important;
                     margin: auto !important;
                 }
-                /* Ensure clear, readable text without forcing arbitrary massive zooms */
+                /* Massive bump to text size for readability - forces Mermaid to draw huge blocks naturally */
                 .node foreignObject div, .node text {
-                    font-size: 16px !important;
+                    font-size: 22px !important;
                     color: #0f172a !important;
                     fill: #0f172a !important;
-                    font-weight: 600 !important;
+                    font-weight: 700 !important;
+                    line-height: 1.5 !important;
                 }
                 /* Add subtle node borders */
                 .node rect, .node polygon, .node circle {
-                    stroke-width: 1.5px !important;
+                    stroke-width: 2px !important;
                     stroke: #475569 !important;
                 }
                 .edgePath path {
                     stroke: #64748b !important;
-                    stroke-width: 2px !important;
+                    stroke-width: 2.5px !important;
                 }
             `}</style>
             <div
