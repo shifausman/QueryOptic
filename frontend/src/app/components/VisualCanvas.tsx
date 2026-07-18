@@ -23,12 +23,17 @@ export default function VisualCanvas({ graphDefinition, metadata }: VisualCanvas
     const [selectedNode, setSelectedNode] = useState<NodeMetadata | null>(null);
 
     useEffect(() => {
-        // Initialize Mermaid with dark theme
+        // Initialize Mermaid with larger typography constraints
         mermaid.initialize({
             startOnLoad: false,
             theme: 'dark',
-            securityLevel: 'loose', // Needed to support click events
-            fontFamily: 'Inter, sans-serif'
+            themeVariables: {
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '18px',          // Boost font size significantly for readability
+                nodeTextColor: '#0f172a',  // Ensure explicitly dark text on light pastel nodes
+                lineColor: '#64748b'
+            },
+            securityLevel: 'loose' // Needed to support click events
         });
 
         const renderGraph = async () => {
@@ -77,10 +82,10 @@ export default function VisualCanvas({ graphDefinition, metadata }: VisualCanvas
     };
 
     return (
-        <div className="w-full h-full relative">
+        <div className="w-full h-full relative flex-1 min-h-0">
             <div
                 ref={mermaidRef}
-                className="w-full h-full flex items-center justify-center [&>svg]:max-w-full [&>svg]:max-h-full"
+                className="w-full h-full overflow-auto flex justify-center p-8 [&>svg]:min-w-[800px] [&>svg]:h-auto"
             />
 
             {/* Metadata overlay mapping */}

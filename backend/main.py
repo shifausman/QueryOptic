@@ -36,11 +36,12 @@ You MUST output a single valid JSON object containing exactly two keys: "mermaid
 
 1. "mermaid_graph": A string containing a valid Mermaid.js flowchart TD syntax.
    - Use strict chronological mapping: Base Tables -> Joins -> Subqueries -> GROUP BY -> Aggregates -> HAVING -> Window -> ORDER BY.
-   - Assign strict styling (e.g. style NODE_ID fill:#e0f2fe):
+   - Assign strict styling (e.g. style NODE_ID fill:#e0f2fe,color:#0f172a):
      - Primary operations (Base Joins/Subqueries): Blue (#e0f2fe)
      - Heavy operations (Aggregates/Window/Group): Yellow (#fef08a)
      - Operations handling logic (WHERE/HAVING): Light Blue/Light Yellow with explicit square/circle distinctions
      - Final Operations (ORDER BY): Green (#dcfce7)
+   - ALWAYS explicitly apply `,color:#0f172a` to all node styles to force dark text on the pastel backgrounds!
    - Do NOT use double quotes inside the Mermaid syntax to avoid JSON formatting issues.
 
 2. "nodes_metadata": A dictionary where each key is a NODE_ID from the mermaid graph.

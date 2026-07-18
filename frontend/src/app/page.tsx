@@ -232,9 +232,8 @@ export default function DesignStudio() {
         </div>
 
         {/* Right Panel: Visualization Grid & Simulator Component */}
-        <div className="flex flex-col gap-6 h-[calc(100vh-8rem)]">
-
-          <div className="flex-[0.7] relative bg-slate-900/30 rounded-2xl border border-white/5 overflow-hidden backdrop-blur-sm shadow-2xl">
+        <div className="flex flex-col gap-6 h-[calc(100vh-8rem)] overflow-y-auto pr-2 pb-6 custom-scrollbar">
+          <div className="relative bg-slate-900/30 rounded-2xl border border-white/5 overflow-hidden backdrop-blur-sm shadow-2xl min-h-[600px] shrink-0 flex flex-col">
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_50%,#4f46e510,transparent)]"></div>
             <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#8080801a_1px,transparent_1px),linear-gradient(to_bottom,#8080801a_1px,transparent_1px)] bg-[size:40px_40px]"></div>
@@ -278,10 +277,9 @@ export default function DesignStudio() {
           </div>
 
           {/* Bottom Right: DataSimulator Scaffold */}
-          <div className="flex-[0.3]">
-            <DataSimulator />
+          <div className="shrink-0 mt-4">
+            <DataSimulator data={graphData} schema={schema} />
           </div>
-
         </div>
       </main>
     </div>
