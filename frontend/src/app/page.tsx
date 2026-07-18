@@ -192,7 +192,7 @@ export default function DesignStudio() {
         )}
       </AnimatePresence>
 
-      <main className="flex-1 max-w-[1800px] w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-[400px_1fr] xl:grid-cols-[480px_1fr] gap-6">
+      <main className="flex-1 max-w-[1900px] w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-[320px_1fr] xl:grid-cols-[360px_1fr] gap-4">
 
         {/* Left Panel: Inputs & Simulator */}
         <div className="flex flex-col gap-6 h-[calc(100vh-8rem)]">

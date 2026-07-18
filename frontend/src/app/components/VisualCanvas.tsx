@@ -84,13 +84,15 @@ export default function VisualCanvas({ graphDefinition, metadata }: VisualCanvas
     return (
         <div className="w-full h-full relative flex-1 min-h-0">
             <style>{`
-                /* Revert to natural Mermaid bounds */
+                /* Prevent Tailwind from auto-squishing wide SVGs */
                 .mermaid-host svg {
-                    max-width: 100% !important;
+                    max-width: none !important;
                     height: auto !important;
+                    margin: auto !important;
                 }
-                /* Force text inside nodes to be dark without forcing massive font sizes */
+                /* Ensure clear, readable text without forcing arbitrary massive zooms */
                 .node foreignObject div, .node text {
+                    font-size: 16px !important;
                     color: #0f172a !important;
                     fill: #0f172a !important;
                     font-weight: 600 !important;
